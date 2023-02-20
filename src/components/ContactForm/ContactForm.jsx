@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
+// import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from '../../redux/selectors';
 import { addContactToStore } from '../../redux/contacts/contacts.thunk';
 
@@ -9,24 +9,24 @@ const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
-  const [name, setName] = useState(
-    () => JSON.parse(localStorage.getItem('name')) ?? ''
-  );
-  const [phone, setphone] = useState(
-    () => JSON.parse(localStorage.getItem('phone')) ?? ''
+  const [name, setName] = useState(() => localStorage.getItem('name') ?? '');
+  const [number, setNumber] = useState(
+    () => localStorage.getItem('number') ?? ''
   );
 
   const handleInputChange = event => {
     const { name, value } = event.target;
     switch (name) {
       case 'name':
-        localStorage.setItem('name', JSON.stringify(value));
+        // localStorage.setItem('name', JSON.stringify(value));
+        localStorage.setItem('name', value);
         setName(value);
         break;
 
-      case 'phone':
-        localStorage.setItem('phone', JSON.stringify(value));
-        setphone(value);
+      case 'number':
+        // localStorage.setItem('number', JSON.stringify(value));
+        localStorage.setItem('number', value);
+        setNumber(value);
         break;
 
       default:
@@ -45,15 +45,18 @@ const ContactForm = () => {
       return;
     }
 
-    const contact = { id: nanoid(), name, phone };
-
-    dispatch(addContactToStore(contact));
+    // const contact = { id: nanoid(), name, phone };
+    // const contact = { name, phone };
+    console.log(' name  :>>', { name });
+    console.log(' number  :>>', { number });
+    // dispatch(addContactToStore(contact));
+    dispatch(addContactToStore({ name, number }));
     //contact in actions in slice - is payload
     localStorage.removeItem('name');
-    localStorage.removeItem('phone');
+    localStorage.removeItem('number');
 
     setName('');
-    setphone('');
+    setNumber('');
   };
 
   return (
@@ -76,15 +79,15 @@ const ContactForm = () => {
 
         <input
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone phone must be digits and can contain spaces, dashes, parentheses and can start with +"
-          value={phone}
+          title="Number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          value={number}
           onChange={handleInputChange}
           required
         />
       </label>
-      <button className={css.button} type="submit" disabled={!name || !phone}>
+      <button className={css.button} type="submit" disabled={!name || !number}>
         Add contact
       </button>
     </form>

@@ -8,10 +8,11 @@ export const privateApi = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
 });
 
-export const setAuthHeader = token => {
-  privateApi.defaults.headers.Authorization = `Bearer ${token}`;
-};
-
-export const clearAuthHeader = () => {
-  privateApi.defaults.headers.Authorization = '';
+export const token = {
+  set: token => {
+    privateApi.defaults.headers.Authorization = token;
+  },
+  remove: () => {
+    privateApi.defaults.headers.Authorization = null;
+  },
 };

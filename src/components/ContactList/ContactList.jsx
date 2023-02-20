@@ -10,31 +10,21 @@ const ContactList = () => {
   const dispatch = useDispatch();
   const filteredContacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectIsLoading);
-  // const filteredContactsHandler = () => {
-  //   return contacts.filter(item =>
-  //     item.name.toLowerCase().includes(filter.toLowerCase())
-  //   );
-  // };
 
   useEffect(() => {
     dispatch(getContactsFromStore());
   }, [dispatch]);
 
-  // const filteredContacts = useMemo(
-  //   () =>
-  //     contacts.filter(item =>
-  //       item.name.toLowerCase().includes(filter.toLowerCase())
-  //     ),
-  //   [contacts, filter]
-  // );
-
   return (
     <>
-      <ul>
-        {filteredContacts.map(({ id, name, phone }) => (
-          <ContactItem key={id} id={id} name={name} phone={phone} />
-        ))}
-      </ul>
+      {!isLoading && (
+        <ul>
+          {filteredContacts.map(({ id, name, number }) => (
+            <ContactItem key={id} id={id} name={name} number={number} />
+          ))}
+        </ul>
+      )}
+
       {isLoading && <Loader />}
     </>
   );
