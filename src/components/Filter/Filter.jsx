@@ -1,8 +1,9 @@
 import React from 'react';
-import css from './Filter.module.css';
+// import css from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterContactsSliceAction } from '../../redux/filter/filter.slice';
 import { selectFilter } from '../../redux/selectors';
+import { TextField } from '@mui/material';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -13,19 +14,19 @@ const Filter = () => {
   };
 
   return (
-    <div className={css.findForm}>
-      <h2 className={css.title}>Find contacts by name</h2>
-      <label className={css.label}>
-        <span className={css.labelTitle}>Name</span>
-        <input
-          type="text"
-          onChange={event => handleOnChange(event)}
-          value={filter}
-          name="filter"
-          placeholder="type name here"
-        />
-      </label>
-    </div>
+    <>
+      <h4>Contacts in your phonebook</h4>
+      <TextField
+        sx={{ width: '500px', mb: '20px' }}
+        label="Find contacts by name"
+        variant="outlined"
+        type="text"
+        name="filter"
+        value={filter}
+        placeholder="type name here"
+        onChange={event => handleOnChange(event)}
+      />
+    </>
   );
 };
 

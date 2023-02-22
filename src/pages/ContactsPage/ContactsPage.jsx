@@ -1,19 +1,19 @@
 import ContactForm from 'components/ContactForm/ContactForm';
 import Filter from 'components/Filter/Filter';
 import ContactList from 'components/ContactList/ContactList';
-import { Container, Heading } from './ContactsPage.styled';
+import { Heading, StyledWrapper } from './ContactsPage.styled';
 
 const ContactsPage = () => {
   return (
-    <Container>
-      <Heading>Contacts</Heading>
+    <StyledWrapper>
+      <Heading>Add new contact</Heading>
 
       <ContactForm />
 
       <Filter />
 
       <ContactList />
-    </Container>
+    </StyledWrapper>
   );
 };
 

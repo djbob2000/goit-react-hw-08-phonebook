@@ -23,7 +23,7 @@ export const authLogout = createAsyncThunk(
     if (!stateToken) {
       return rejectWithValue();
     }
-
+    console.log('authLogout');
     try {
       token.set(stateToken.token);
       await privateApi.post('users/logout');

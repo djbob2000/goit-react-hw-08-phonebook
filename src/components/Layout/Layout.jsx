@@ -1,44 +1,75 @@
-import { Navigation } from 'components/Navigation/Navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Outlet } from 'react-router-dom';
-import { authLogout } from 'redux/auth/auth.operations';
+import { Box } from '@mui/material';
+import { Container } from '@mui/system';
+import { UserMenu } from 'components/UserMenu/UserMenu';
+import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+
+import {
+  StyledContactPhoneIcon,
+  StyledHome,
+  StyledHowToRegIcon,
+  StyledLoginIcon,
+  StyledNavLink,
+} from './Layout.styled';
+
 import { selectLoginToken } from 'redux/auth/auth.selectors';
 
 export const Layout = () => {
-  const dispatch = useDispatch();
-  const token = useSelector(selectLoginToken);
+  const isLoggedIn = useSelector(selectLoginToken);
 
-  const handleLogout = () => {
-    dispatch(authLogout());
-  };
   return (
     <>
-      <header>
-        {token ? (
-          <>
-            <p>Hello, {token.user.name}</p>
-            <p>{token.user.email}</p>
-            <button type="button" onClick={handleLogout}>
-              Log Out
-            </button>
-          </>
-        ) : (
-          <Navigation />
-        )}
-      </header>
-      <main>
-        <aside>
-          <ul>
-            <li>
-              <NavLink to="/">Home Page</NavLink>
-            </li>
-            {token && (
-              <li>
-                <NavLink to="contacts">Phonebook</NavLink>
-              </li>
+      {/* <header> */}
+      <Container>
+        <nav>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'top',
+              gap: '20px',
+              borderBottom: 2,
+              borderColor: 'primary.main',
+              marginBottom: '20px',
+            }}
+          >
+            <StyledNavLink to="/">
+              {' '}
+              <StyledHome />
+              Home
+            </StyledNavLink>
+
+            {isLoggedIn && (
+              <StyledNavLink
+                to="contacts"
+                sx={{
+                  gap: '5px',
+                }}
+              >
+                <StyledContactPhoneIcon />
+                Contacts
+              </StyledNavLink>
             )}
-          </ul>
-        </aside>
+
+            {isLoggedIn ? (
+              <UserMenu />
+            ) : (
+              <>
+                <StyledNavLink to="register">
+                  <StyledHowToRegIcon />
+                  Register
+                </StyledNavLink>
+                <StyledNavLink to="login">
+                  <StyledLoginIcon />
+                  Log in
+                </StyledNavLink>
+              </>
+            )}
+          </Box>
+        </nav>
+      </Container>
+      {/* </header> */}
+      <main>
         <Outlet />
       </main>
     </>

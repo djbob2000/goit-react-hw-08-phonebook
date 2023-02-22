@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import css from './ContactForm.module.css';
+// import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from '../../redux/selectors';
 import { addContactToStore } from '../../redux/contacts/contacts.thunk';
+import { Button, TextField } from '@mui/material';
+import { StyledForm, styledForm } from './ContactForm.styled';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -60,37 +62,33 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label className={css.label}>
-        <span className={css.labelTitle}>Name</span>
-
-        <input
+    <>
+      <StyledForm onSubmit={handleSubmit}>
+        <TextField
+          label="Name"
+          variant="outlined"
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           value={name}
           onChange={handleInputChange}
           required
         />
-      </label>
-      <label className={css.label}>
-        <span className={css.labelTitle}>Number</span>
 
-        <input
+        <TextField
+          label="Number"
+          variant="outlined"
           type="tel"
           name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Number must be digits and can contain spaces, dashes, parentheses and can start with +"
           value={number}
           onChange={handleInputChange}
           required
         />
-      </label>
-      <button className={css.button} type="submit" disabled={!name || !number}>
-        Add contact
-      </button>
-    </form>
+
+        <Button variant="contained" type="submit" disabled={!name || !number}>
+          Add contact
+        </Button>
+      </StyledForm>
+    </>
   );
 };
 

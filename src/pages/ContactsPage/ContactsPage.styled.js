@@ -1,17 +1,15 @@
+import { Container } from '@mui/material';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  color: #122236;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  margin-top: 16px;
-  font-size: 24px;
+  justify-content: center;
+  font-size: 20px;
 `;
 
-export const Heading = styled.h2`
+export const Heading = styled.h4`
   margin: 0;
   margin-bottom: 16px;
 `;
