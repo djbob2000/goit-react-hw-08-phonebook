@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from '../../redux/selectors';
 import { addContactToStore } from '../../redux/contacts/contacts.thunk';
 import { Button, TextField } from '@mui/material';
-import { StyledForm, styledForm } from './ContactForm.styled';
+import { StyledForm } from './ContactForm.styled';
 
 const ContactForm = () => {
   const dispatch = useDispatch();

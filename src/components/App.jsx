@@ -4,7 +4,6 @@ import { Layout } from './Layout/Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { lazy, Suspense } from 'react';
-import Loader from './Loader/Loader';
 
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
