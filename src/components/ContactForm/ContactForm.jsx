@@ -71,6 +71,9 @@ const ContactForm = () => {
           name="name"
           value={name}
           onChange={handleInputChange}
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          placeholder="Sara Connor"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           required
         />
 
@@ -81,6 +84,9 @@ const ContactForm = () => {
           name="number"
           value={number}
           onChange={handleInputChange}
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          placeholder="123-45-67"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           required
         />
 
